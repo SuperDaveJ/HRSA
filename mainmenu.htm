@@ -1,0 +1,369 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>HRSA Unified Health Communication: Addressing Health Literacy, Cultural Competency, and Limited English Profiency</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<script language="JavaScript" type="text/JavaScript" src="scripts/APIWrapper.js"></script>
+<script language="JavaScript" type="text/JavaScript" src="scripts/SCOFunctions.js"></script>
+<script language="JavaScript" type="text/JavaScript" src="scripts/access.js"></script>
+<script language="JavaScript" type="text/JavaScript" src="scripts/hrsaFunctions.js"></script>
+<script language="JavaScript" type="text/JavaScript">
+<!--
+initializePage();
+
+var pilot = true;	//for pilot only.  Change it to FALSE after pilot.  Search for pilot to find out where it is used.
+var numTern = 4;
+var strOpenT = "";
+var arrPopup = new Array();
+for (var i=0; i<numTern; i++) {
+	arrPopup[i] = "";
+}
+//Guide 1
+arrPopup[0]  = "<p><br>Welcome to the Supervisor Development Challenge Web-based Training Precourse!</p><p>As a new supervisor it&rsquo;s incredibly important to know the basic agency and federal policies, regulations, and laws that apply to your position.</p><p>Complete the Pre-Challenge Assessment as your first step in meeting the Supervisor Development Challenge. Good luck.</p>";
+
+arrPopup[1]  = "<p><br>Congratulations on completing your first challenge! You&rsquo;re now<br>ready to move along the Supervisor Development Challenge path.</p><p>You must complete every Module to gain access to your<br>Post-Challenge Assessment. Select Module 1 to begin.</p>";
+
+arrPopup[2]  = "<p><br>Congratulations! You&rsquo;ve made it to the final stage, the <br>Post Challenge Assessment.</p><p>Upon completion, you&rsquo;ll receive a Certificate that allows you to attend the classroom portion of the Supervisor Development Challenge.</p>";
+
+arrPopup[3]  = "<p><br>Congratulations! You&rsquo;ve finished the entire course. Select the print icon to print your certification.</p>";
+
+function openWin(whichWin){
+var intH = self.screenTop + 50
+var intW = self.screenLeft + 120
+var theURL =  whichWin; 
+theURL = theURL +".htm" //+ ".htm?ver=" + intVersion
+var scrollbars = "no"
+	window.open(theURL,"","left="+intW+",top="+intH+",width=539,height=354,resizable=no,scrollbars="+scrollbars+", status=no, toolbar=no, menubar=no, location=no")
+}
+
+MM_reloadPage(true);
+
+function popConfirm(){
+	if (confirm("Do you wish to exit the course?")==true) exitCourse(true);
+}
+
+function updateMenu() {
+	closing = false;
+//================
+//check the status
+
+//// disable the following test code while delivery LMS version
+//var PreExamDone = 2;
+//var nCompleted = 0;
+//var	arrMLessons = new Array();
+//	for (var i=0; i<9; i++) {
+//		arrMLessons[i] = 1;
+//	}
+//	arrMLessons[3] = 2;
+//	//arrMLessons[8] = 0;
+//	if (PreExamDone == 0) { // first time, show only pre-test
+//		eval("document.getElementById('mod0').style.visibility = 'visible'");
+//		document.getElementById('openText').innerHTML = arrPopup[0];		
+//		for (var i=1; i<=9; i++) { // and hide all modules
+//			eval("document.getElementById('mod" + (i) + "').style.visibility = 'hidden'");
+//			eval("document.getElementById('completed" + (i) + "').style.visibility = 'hidden'");
+//		}
+//	} else {  //display completion status			
+//		for (i=0; i<9; i++) {
+//			blnIncomp = false;
+//			if (arrMLessons[i] < 2 ) {
+//				blnIncomp =  true;
+//				//break
+//			}
+//			if (blnIncomp==true) {
+//				eval("document.getElementById('completed" + (i+1) + "').style.visibility = 'hidden'");
+//				eval("document.getElementById('mod" + (i+1) + "').style.visibility = 'visible'");
+//			} else {
+//				eval("document.getElementById('completed" + (i+1) + "').style.visibility = 'visible'");
+//				eval("document.getElementById('mod" + (i+1) + "').style.visibility = 'hidden'");
+//				nCompleted += 1
+//			}
+//		
+//		}
+//		alert(nCompleted)	// all modules completed and open the post assessment			
+//		if (nCompleted<8) {
+//			//eval("document.getElementById('mod9').style.visibility = 'hidden'"); 
+//			document.getElementById("openText").innerHTML = arrPopup[1];
+//		} else if (nCompleted==8) {
+//			eval("document.getElementById('mod9').style.visibility = 'visible'"); 
+//			document.getElementById("openText").innerHTML = arrPopup[2];		
+//		} else {
+//			eval("document.getElementById('completed9').style.visibility = 'visible'");
+//			document.getElementById("openText").innerHTML = arrPopup[3];
+//		//}
+//	}
+//}
+////end test code
+
+	if ( (verNumber != 2) || (pilot) ) {
+		var nCompleted = 0;
+		if (PreExamDone == 0) { // first time, show only pre-test
+			eval("document.getElementById('mod0').style.visibility = 'visible'"); 
+			document.getElementById("openText").innerHTML = arrPopup[0];
+			for (var i=1; i<=nModule; i++) { // and hide all modules
+				if (!pilot) {
+					// show everything for pilot
+					eval("document.getElementById('mod" + (i) + "').style.visibility = 'hidden'");
+					eval("document.getElementById('completed" + (i) + "').style.visibility = 'hidden'");
+				}
+			} 
+		} else {  //display completion status		
+			for (i=0; i<nModule; i++) {
+				blnIncomp = false;
+				for (j=0; j<arrMLessons[i]; j++) {
+					if (arrLessonStatus[i][j] < 2 ) {
+						blnIncomp = true;
+						break
+					}
+				}
+				if (blnIncomp==true) {
+					eval("document.getElementById('completed" + (i+1) + "').style.visibility = 'hidden'");
+					eval("document.getElementById('mod" + (i+1) + "').style.visibility = 'visible'");
+				} else {
+					eval("document.getElementById('completed" + (i+1) + "').style.visibility = 'visible'");
+					eval("document.getElementById('mod" + (i+1) + "').style.visibility = 'hidden'");
+					nCompleted += 1
+				}
+			}
+			// show the opening text	
+			if (nCompleted<nModule-1) {//all modules not completed
+				eval("document.getElementById('mod9').style.visibility = 'hidden'"); 
+				document.getElementById("openText").innerHTML = arrPopup[1];	
+			} else if (nCompleted==nModule-1) { //all modules completed, then open the post assessment 
+				eval("document.getElementById('mod9').style.visibility = 'visible'"); 
+				document.getElementById("openText").innerHTML = arrPopup[2];		
+			} else { // all module and post assessment completed
+				eval("document.getElementById('completed9').style.visibility = 'visible'");
+				document.getElementById("openText").innerHTML = arrPopup[3];
+			}//end show text		
+		}//end all module check
+	} //end LMS version
+//==================== check the status over
+
+}
+
+function MM_swapImgRestore() { //v3.0
+  var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
+}
+
+function MM_preloadImages() { //v3.0
+  var d=document; if(d.images){ if(!d.MM_p) d.MM_p=new Array();
+    var i,j=d.MM_p.length,a=MM_preloadImages.arguments; for(i=0; i<a.length; i++)
+    if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
+}
+
+function MM_findObj(n, d) { //v4.01
+  var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
+    d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
+  if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
+  for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document);
+  if(!x && d.getElementById) x=d.getElementById(n); return x;
+}
+
+function MM_swapImage() { //v3.0
+  var i,j=0,x,a=MM_swapImage.arguments; document.MM_sr=new Array; for(i=0;i<(a.length-2);i+=3)
+   if ((x=MM_findObj(a[i]))!=null){document.MM_sr[j++]=x; if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];}
+}
+
+function closeMe(){
+	if(confirm("Select OK to close to exit the course. Select Cancel to return to the course.")){
+		window.close();
+	}
+
+}
+
+function openCredits(){
+	window.open('credits.htm', 'HRSAcredits', 'width=400, height=250,resizable=yes');
+}
+
+var door1 = true;
+var door24 = true;
+var door5 = true;
+
+function activateDoor(d){
+	if(d == 24){door24 = true};
+	if(d == 5){door5 = true};	
+}
+
+function openDoor(d){
+	if(d == 1){
+		if(door1){
+			MM_swapImage('btn_intro_health','','sysimages/intro-to-health-door.jpg',1);
+			divRoll(1,'mod1bubble');
+		}
+	}		
+	if(d == 2){
+		if(door24){
+			MM_swapImage('btn_Health_Literacy','','sysimages/health-lit-door.jpg',1);
+			divRoll(1,'mod2bubble');
+		}
+	}		
+	if(d == 3){
+		if(door24){
+			MM_swapImage('btn_cultural_competency','','sysimages/cultural-comp-door.jpg',1);
+			divRoll(1,'mod3bubble');
+		}
+	}		
+	if(d == 4){
+		if(door24){
+			MM_swapImage('btn_limited_eng','','sysimages/limited-english-door.jpg',1);
+			divRoll(1,'mod4bubble');
+		}
+	}		
+	if(d == 5){
+		if(door5){
+			MM_swapImage('btn_capstone','','sysimages/capstone-door.jpg',1);
+			divRoll(1,'mod5bubble');
+		}
+	}		
+}
+
+function goDoor(d){		
+	if(d == 1){
+		if(door1){
+			location.href= 'm1_lessons/01005.html';
+		}
+	}			
+	if(d == 2){
+		if(door24){
+			location.href= 'm2_lessons/0201005.html';
+		}
+	}			
+	if(d == 3){
+		if(door24){
+			location.href= 'm3_lessons/03005.html';
+		}
+	}			
+	if(d == 4){
+		if(door24){
+			location.href= 'm4_lessons/04005.html';
+		}
+	}			
+	if(d == 5){
+		if(door5){
+			location.href= 'm5_lessons/05005.html';
+		}
+	}	
+
+}
+
+
+
+//-->
+</script>
+
+<style type="text/css">
+<!--
+body {
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	background-image: url(sysimages/main-page3.jpg);
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	background-repeat: no-repeat;
+}
+p {
+	text-align: left;
+	font-weight: bold; 
+	margin-top: -6px;
+	}
+
+
+#buttonMod1 {
+	position:absolute; 
+	width:58px; 
+	height:54px; 
+	z-index:1;
+	left: 7px; 
+	top: 211px; 
+}
+
+#buttonMod2 {
+	position:absolute; 
+	width:38px; 
+	height:44px; 
+	z-index:1;
+	left: 197px; 
+	top: 200px; 
+}
+
+#buttonMod3 {
+	position:absolute; 
+	width:35px; 
+	height:35px; 
+	z-index:1;
+	left: 348px; 
+	top: 210px; 
+}
+
+#buttonMod4 {
+	position:absolute; 
+	width:31px; 
+	height:32px; 
+	z-index:1;
+	left: 479px; 
+	top: 210px; 
+}
+
+#buttonMod5 {
+	position:absolute; 
+	width:28px; 
+	height:29px; 
+	z-index:1;
+	left: 589px; 
+	top: 211px; 
+}
+
+/* following line is for png transparency */
+img, div { behavior: url(iepngfix.htc) }
+-->
+</style>
+</head>
+
+<body onLoad="updateMenu(); MM_preloadImages('sysimages/screen_mainmenu.jpg','sysimages/lesson1_0.jpg','sysimages/lesson2_0.jpg','sysimages/lesson3_0.jpg','sysimages/lesson4_0.jpg','sysimages/lesson1_2.jpg','sysimages/lesson2_2.jpg','sysimages/lesson3_2.jpg','sysimages/lesson4_2.jpg','sysimages/health-door-open.jpg','sysimages/intro-door-open.jpg','sysimages/cultural-door-open.jpg','sysimages/limited-Eng-door-open.jpg','sysimages/capstone-door-open.jpg','sysimages/exit-up.jpg','sysimages/exit-down.jpg','sysimages/credits-down.jpg','sysimages/credits-up.jpg');this.focus()" onUnload="if (closing) exitCourse(false)">
+
+<div id="openText" style="position:absolute; left:44px; top:71px; width:475px; visibility:hidden; height: 83px;"></div>
+
+<div  id="mod0" style="position:absolute; width:109px; height:39px; z-index:0; top: 208px; left: 41px; visibility: hidden;"></div>
+
+<div  id="mod9" style="position:absolute; width:109px; height:39px; z-index:9; top: 208px; left: 45px; visibility:hidden"></div>
+
+<div id="mod1" style="position:absolute; width:154px; height:317px; z-index:1; top: 103px; left: 44px;"><a href="javascript:goDoor(1)" onMouseOut="MM_swapImgRestore();divRoll(0,'mod1bubble')" onMouseOver="openDoor(1)"><img src="sysimages/blank.gif" alt="Mod 1 Intro to Health Communications" name="btn_intro_health" width="153" height="312" border="0"></a></div>
+<div id="buttonMod1"><a href="javascript:goDoor(1)" onMouseOut="MM_swapImgRestore();divRoll(0,'mod1bubble')" onMouseOver="openDoor(1)"><img src="sysimages/trans.gif" alt="Mod 1 Intro to Health Communications" width="54" height="58" border="0"></a></div>
+
+<div id="mod2" style="position:absolute; width:92px; height:234px; z-index:2; top: 132px; left: 227px;"><a href="javascript:goDoor(2)" onMouseOut="MM_swapImgRestore();divRoll(0,'mod2bubble')" onMouseOver="openDoor(2)"><img src="sysimages/blank.gif" alt="Mod 2 Health Literacy" name="btn_Health_Literacy" width="97" height="239" border="0"></a></div>
+<div id="buttonMod2"><a href="javascript:goDoor(2)" onMouseOut="MM_swapImgRestore();divRoll(0,'mod2bubble')" onMouseOver="openDoor(2)" alt="Mod 2 Health Literacy" width="38" height="44" border="0"><img src="sysimages/trans.gif" alt="Mod 2 Health Literacy" width="40" height="44" border="0"></a></div>
+
+<div id="mod3" style="position:absolute; width:82px; height:179px; z-index:3; top: 151px; left: 378px;"><a href="javascript:goDoor(3)" onMouseOut="MM_swapImgRestore();divRoll(0,'mod3bubble')" onMouseOver="openDoor(3)"><img src="sysimages/blank.gif" alt="Mod 3 Cultural Competency" name="btn_cultural_competency" width="88" height="184" border="0"></a></div>
+<div id="buttonMod3"><a href="javascript:goDoor(3)" onMouseOut="MM_swapImgRestore();divRoll(0,'mod3bubble')" onMouseOver="openDoor(3)"><img src="sysimages/trans.gif" alt="Mod 3 Cultural Competency" width="35" height="35" border="0"></a></div>
+
+<div id="mod4" style="position:absolute; width:80px; height:157px; z-index:4; top: 162px; left: 506px;"><a href="javascript:goDoor(4)" onMouseOut="MM_swapImgRestore();divRoll(0,'mod4bubble')" onMouseOver="openDoor(4)"><img src="sysimages/blank.gif" alt="Mod 4 Limited English Profeciency" name="btn_limited_eng" width="79" height="164" border="0"></a></div>
+<div id="buttonMod4"><a href="javascript:goDoor(4)" onMouseOut="MM_swapImgRestore();divRoll(0,'mod4bubble')" onMouseOver="openDoor(4)"><img src="sysimages/trans.gif" alt="Mod 4 Limited English Profeciency" width="31" height="32" border="0"></a></div>
+
+<div id="mod5" style="position:absolute; width:84px; height:158px; z-index:5; top: 162px; left: 615px;"><a href="javascript:goDoor(5)" onMouseOut="MM_swapImgRestore();divRoll(0,'mod5bubble')" onMouseOver="openDoor(5)"><img src="sysimages/blank.gif" alt="Mod 5 Capstone Activity" name="btn_capstone" width="79" height="164" border="0"></a></div>
+<div id="buttonMod5"><a href="javascript:goDoor(5)" onMouseOut="MM_swapImgRestore();divRoll(0,'mod5bubble')" onMouseOver="openDoor(5)"><img src="sysimages/trans.gif" alt="Mod 5 Capstone Activity" width="29" height="28" border="0"></a></div>
+
+<!-- thought bubbles -->
+<div id="mod1bubble" style="position:absolute; width:205px; height:90px; z-index:5; top: 125px; left: 728px; visibility:hidden"><img src="sysimages/word_bubbles/mod1_bubble.png" alt="The Introduction to Health Communication module will take approximately 30 minutes to complete." width="203" height="87"></div>
+<div id="mod2bubble" style="position:absolute; width:205px; height:90px; z-index:5; top: 269px; left: 767px; visibility:hidden"><img src="sysimages/word_bubbles/mod2_bubble.png" alt="The Health Literacy module will take approximately 60 minutes to complete." width="202" height="87"></div>
+<div id="mod3bubble" style="position:absolute; width:205px; height:90px; z-index:5; top: 125px; left: 728px; visibility:hidden"><img src="sysimages/word_bubbles/mod3_bubble.png" alt="The Cultural Competency module will take approximately 60 minutes to complete." width="203" height="87"></div>
+<div id="mod4bubble" style="position:absolute; width:205px; height:90px; z-index:5; top: 269px; left: 767px; visibility:hidden"><img src="sysimages/word_bubbles/mod4_bubble.png" alt="The Limited English Proficiencey module will take approximately 60 minutes to complete." width="202" height="87"></div>
+<div id="mod5bubble" style="position:absolute; width:205px; height:90px; z-index:5; top: 125px; left: 728px; visibility:hidden"><img src="sysimages/word_bubbles/mod5_bubble.png" alt="The Capstone Activity module will take approximately 30 minutes to complete." width="203" height="87"></div>
+
+
+<!--
+<div id="credit" style="position:absolute; width:100px; height:73px; z-index:6; top: 541px; left: 631px;"><a href="javascript:transTerm(1)">Audio Transcript</a></div>
+-->
+<div id="mainmenu" style="position:absolute; width:800px; height:70px; top:0px; left:0px"><img src="sysimages/blank.gif" alt="HRSA Unified Health Communication: Addressing Health Literacy, Cultural Competency, and Limited English Proficiency." height="70" width="800"></div>
+
+<div id="credit" style="position:absolute; width:71px; height:60px; z-index:6; top: 517px; left: 724px;"><a href="pdf/credits.pdf" target="_blank" onMouseOver="MM_swapImage('btn_credits','','sysimages/credits-2.jpg',1)" onMouseOut="MM_swapImgRestore()"><img src="sysimages/blank.gif" alt="Credits" name="btn_credits" width="90" height="80" border="0"></a></div>
+
+<div id="help" style="position:absolute; width:80px; height:72px; z-index:6; top: 526px; left: 6px;"><a href="javascript:openHelp()" onMouseOver="MM_swapImage('btn_help','','sysimages/help-2.jpg',1)" onMouseOut="MM_swapImgRestore()"><img src="sysimages/blank.gif" alt="Help" name="btn_help" width="80" height="72" border="0"></a></div>
+
+<!--show completion signs for each module-->
+<div id="LybtExit" style="position:absolute; width:93px; height:79px; z-index:7; top: 515px; left: 819px;"></div>
+<span style="position:absolute; width:90px; height:77px; z-index:7; top: 517px; left: 815px;"><a href="javascript:closeMe();" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('btn_exit','','sysimages/exit-2.jpg',1)"><img src="sysimages/blank.gif" alt="Exit" name="btn_exit" width="91" height="80" border="0"></a></span>
+</body>
+</html>

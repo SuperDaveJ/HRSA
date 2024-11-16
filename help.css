@@ -1,0 +1,109 @@
+/* CSS Document */
+
+body {
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	bgcolor: #000000;
+	margin: 0px;
+
+	}
+
+
+a:link {
+	color:#036FFB;
+	font-weight: normal;
+	text-decoration: underline;
+	}
+a:visited {
+	color:#054EAC;
+	font-weight: normal;
+	text-decoration: underline;
+	}
+a:hover {
+	text-decoration: underline;
+	color:#036FFB;
+	}
+a:active {
+	text-decoration: underline;
+	color: #036FFB;
+	}
+
+h1 {
+	margin: 25px 0px 15 0px;
+	letter-spacing: -1px;
+	border-bottom: 1px solid #666;
+	padding-bottom: 3px;
+	font-size: 20px;
+	color: #333333;
+	padding: 0px 0px 3px 5px;	
+}
+
+h2 {
+	margin: 20px 0px 0px 0px;
+	letter-spacing: -.3px;
+	padding 0;
+	color: #666666;
+	font-size: 18px;
+	padding: 0px 0px 3px 5px;	
+}
+
+h3 {
+	margin: 25px 0px 10px 0px;
+	padding: 0px 0px 3px 5px;	
+	color: #000000;
+	font-size: 16px;
+	font-style:italic;
+	font-weight:bold;
+}
+
+p {
+	text-align: left;
+	margin-top: 0px;
+	font-size: 14px;
+	margin: 20px 0px 10px 0px;
+	padding: 0px 0px 3px 5px;	
+	}
+
+ul {
+	margin-left: 35px;
+	margin-top: 5px;
+	padding: 0px;
+	list-style-type: disc;
+	/*list-style-image: url(sysimages/Bullet.gif);*/
+	}
+
+ol {
+	margin-left: 35px;
+	margin-top: -6px;
+	padding: 0px;
+
+	}
+
+li {
+	padding-top: 0px; 
+	margin-bottom: 1pt;
+	font-size: 14px;	
+	}
+
+a.bullet:link {
+	text-decoration: underline;
+	color: #036FFB;
+	font-weight:bold;
+	}
+
+a.bullet:visited {
+	text-decoration: underline;
+	color: #054EAC;
+	font-weight:bold;
+	}
+
+a.bullet:hover {
+	text-decoration: underline;
+	color: #036FFB;
+	font-weight:bold;
+	}
+
+a.bullet:active {
+	text-decoration: underline;
+	color: #036FFB;
+	font-weight:bold;
+	}

@@ -1,0 +1,368 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><!-- InstanceBegin template="/Templates/noGraphic.dwt" codeOutsideHTMLIsLocked="false" -->
+<head>
+<!-- InstanceBeginEditable name="doctitle" -->
+<title>HRSA - Unified Health Communication:  Addressing Health Literacy, Cultural Competency, and Limited English Proficiency
+</title>
+<!-- InstanceEndEditable -->
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="../hrsa.css" title = "hrsaCSS">
+
+<script language="JavaScript" type="text/JavaScript" src="../scripts/APIWrapper.js"></script>
+<script language="JavaScript" type="text/JavaScript" src="../scripts/SCOFunctions.js"></script>
+<script language="JavaScript" type="text/JavaScript" src="../scripts/access.js"></script>
+<script language="JavaScript" type="text/JavaScript" src="../scripts/hrsaFunctions.js"></script> 
+
+<!-- InstanceBeginEditable name="EditTur" -->
+<script language="JavaScript">
+// These variables determine the 'active' stage of the navigation buttons.
+// 1 = on
+// 0 = off (disabled)
+
+var next_nav = 0;
+var back_nav = 1;
+
+
+MM_reloadPage(true);
+function setGuide() {
+}
+var nItems = 2;
+var blnChoiceMade = false;
+distracters = new Array(nItems);
+var triesUser = 0;
+var qStatus = 0;	//question status. 1=correct, 0=incorrect
+var strCorrectAns = "0,1";
+arrCorrectAns = new Array(nItems);
+arrCorrectAns = strCorrectAns.split(",");
+userAns = new Array(nItems);
+var PtriesLimit = 1;
+arrFdbk = new Array(nItems);
+arrFdbk[0] = "Sorry, that is incorrect. Please try again.";
+arrFdbk[1] = "Correct! Typically, family members and friends do not make good interpreters, as they are usually untrained as interpreters and are prone to omissions, additions, substitutions, volunteered opinions, semantic errors, and other problematic practices.";
+
+var FbNoAnswer = "Before proceeding, you must complete the question, and then select Done.";
+var FbCorrect;
+var FbFinalIncorrect;
+
+//feedback text
+//var newPara
+//if (intVersion == 1) newPara = "\r\r"
+//else newPara = "<br><br>"
+var FbCorrect = "Correct! Typically, family members and friends do not make good interpreters, as they are usually untrained as interpreters and are prone to omissions, additions, substitutions, volunteered opinions, semantic errors, and other problematic practices.";
+var FbFinalIncorrect = "That is incorrect.  The correct answer is B. False.  Typically, family members and friends do not make good interpreters, as they are usually untrained as interpreters and are prone to omissions, additions, substitutions, volunteered opinions, semantic errors, and other problematic practices.";
+
+var aMsg = "This function is disabled!";
+
+// do not edit below this line
+// ===========================
+bV  = parseInt(navigator.appVersion)
+bNS = navigator.appName=="Netscape"
+bIE = navigator.appName=="Microsoft Internet Explorer"
+
+function nrc(e) {
+   if (bNS && e.which > 1){
+      alert(aMsg)
+      return false
+   } else if (bIE && (event.button >1)) {
+     alert(aMsg)
+     return false;
+   }
+}
+
+document.onmousedown = nrc;
+if (document.layers) window.captureEvents(Event.MOUSEDOWN);
+if (bNS && bV<5) window.onmousedown = nrc;
+
+function onpage() {
+	loadCSS(intVersion);
+	mapStatus = 'off';
+	if (intVersion != 1) { 
+
+	} else {
+		Layers508()
+	}
+
+	//MM_showHideLayers('ModuleMap','','hide');
+}
+
+function hideFeedback() {
+	MM_showHideLayers('feedback','','hide');
+}
+
+function judgeInteraction() {
+	if (triesUser < PtriesLimit ) { 
+		var strTemp
+		strTemp = ""
+		fmDistracter=document.forms[0].fmDistracter
+		for (var i=0; i<nItems; i++) {
+			if(fmDistracter[i].checked) {
+				strTemp = strTemp + "1,";
+			} else {
+				strTemp = strTemp + "0,";
+			}
+		}
+		userAns = strTemp.split(",")
+
+		var unChecked = 0;
+		var nCorrect = 0;
+		var nIncorrect = 0;
+		var nChecksMatched = 0;
+		for (i=0; i<nItems; i++) {
+			if (userAns[i] == 0) unChecked += 1;
+			if (userAns[i] == arrCorrectAns[i]) nCorrect += 1
+		}
+		if (unChecked == nItems) {
+			//No answer selected
+			strTemp = FbNoAnswer;
+		} else {
+			triesUser += 1;
+			if (nCorrect == nItems) {
+				for (i=0; i<nItems; i++) {
+					if (arrCorrectAns [i]==1) {
+						fmDistracter[i].checked = true
+						//eval("document.getElementById('cr" + i + "').className = 'distracter'")
+					} else {
+						fmDistracter[i].checked = false
+						//eval("document.getElementById('cr" + (i+1) + "').className = 'distracter_dis'")
+						//eval("document.getElementById('Letter" + (i+1) + "').className = 'distracter_dis'")
+					}
+					//fmDistracter[i].disabled = "disabled"
+				}		
+				//Correct answers
+				strTemp = FbCorrect;
+				triesUser = PtriesLimit;
+				eval("document.getElementById('disTable').style.cursor = 'text'");
+				
+				//This section is the 1rst of two instances of the call to enable the 'Next' button
+				//
+				//Enable Next button
+				showOrHide('Next',1);
+				showOrHide('Prompt',0);
+				showOrHide('Prompt2',1);
+	
+			} else {
+				//second try
+				if (triesUser == PtriesLimit) {
+					for (i=0; i<nItems; i++) {
+						if (arrCorrectAns [i]==1) {
+							fmDistracter[i].checked = true
+							//eval("document.getElementById('cr" + i + "').className = 'distracter'")
+						}else{
+							fmDistracter[i].checked = false
+							//eval("document.getElementById('cr" + (i+1) + "').className = 'distracter_dis'")
+							//eval("document.getElementById('Letter" + (i+1) + "').className = 'distracter_dis'")
+						}
+						//fmDistracter[i].disabled = "disabled"
+					}
+					strTemp = FbFinalIncorrect;
+					eval("document.getElementById('disTable').style.cursor = 'text'");
+					
+					//This section is the 2nd of two instances of the call to enable the 'Next' button
+					//
+					//Enable Next button					
+					showOrHide('Next',1);
+					showOrHide('Prompt',0);
+					showOrHide('Prompt2',1);
+					
+				} else  { //1st try wrong
+					for (i=0; i<nItems; i++) {
+						if (userAns[i] == 1) strTemp = arrFdbk[i]
+					}
+				}
+			}
+		}
+		if (intVersion == 1) {
+			//D-Link
+			alert(strTemp)
+		} else {
+			MM_showHideLayers('feedback','','show');
+			MM_setTextOfLayer('fdbkText','',strTemp);
+		}
+	}
+}
+
+function MM_swapImgRestore() { //v3.0
+  var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
+}
+
+function MM_preloadImages() { //v3.0
+  var d=document; if(d.images){ if(!d.MM_p) d.MM_p=new Array();
+    var i,j=d.MM_p.length,a=MM_preloadImages.arguments; for(i=0; i<a.length; i++)
+    if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
+}
+
+function MM_findObj(n, d) { //v4.01
+  var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
+    d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
+  if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
+  for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document);
+  if(!x && d.getElementById) x=d.getElementById(n); return x;
+}
+
+function MM_swapImage() { //v3.0
+  var i,j=0,x,a=MM_swapImage.arguments; document.MM_sr=new Array; for(i=0;i<(a.length-2);i+=3)
+   if ((x=MM_findObj(a[i]))!=null){document.MM_sr[j++]=x; if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];}
+}
+//-->
+</script>
+<!-- InstanceEndEditable -->
+<script language="javascript">
+if (typeof(blnTut) == "undefined")  {
+	initializePage();
+}
+
+function chb(event){
+	if(event.shiftKey && event.keyCode == 9){location.hash = 'top'}
+}
+
+function popConfirm(){
+	if (confirm("Do you wish to exit the course?")==true) exitCourse(true);
+}
+function openWin(whichWin){
+var intH = self.screenTop + 50
+var intW = self.screenLeft + 120
+var theURL = whichWin; 
+window.open(theURL,"","left="+intW+",top="+intH+",width=539,height=354,resizable=no,scrollbars=no, status=no, toolbar=no, menubar=no, location=no")
+}
+</script>
+<!-- InstanceBeginEditable name="EditScript" -->
+<script language="JavaScript">
+<!--
+
+MM_reloadPage(true);
+function findNext() {
+	var NextPage = "04220.html"
+	goNext (NextPage);
+}
+function findBack() {
+	var BackPage = "04210.html"
+	goNext (BackPage);
+}
+
+
+//-->
+</script>
+<!-- InstanceEndEditable --> 
+
+</head>
+
+<body onLoad="MM_preloadImages('../sysimages/back-down.jpg','../sysimages/forward-down.jpg','../sysimages/done-2.gif');initPage()" onkeydown="chb(event)">
+<a name="top">
+<div id="TopicH" > 
+	<!-- InstanceBeginEditable name="EditModuleT" --><img src="../sysimages/mod-4-header.jpg" alt="Module Four: Limited English Proficiency" width="370" height="53"><!-- InstanceEndEditable --></div>
+
+<div id="Banner"><img src="../sysimages/blank.gif" alt="HRSA Unified Health Communication: Addressing Health Literacy, Cultural Competency, and Limited English Proficiency." width="433" height="55"></div>
+
+<div id="Prompt">
+	<!-- InstanceBeginEditable name="EditPrompt" -->Select the correct answer, then select Done.<!-- InstanceEndEditable --></div>
+		
+<div id="Prompt2">
+<!-- InstanceBeginEditable name="EditPrompt2" -->Select the Right Arrow to continue.<!-- InstanceEndEditable -->
+</div>	
+		
+<div id="Footnote">
+<!-- InstanceBeginEditable name="Footnote" --><!-- InstanceEndEditable -->
+</div>			
+		
+<!-- InstanceBeginEditable name="bigImage" --><div id="bigImage"></div><!-- InstanceEndEditable --> 
+
+<div id="MainMenu"></div>
+
+<div id="pageN">
+  <div align="right">
+ 	 <!-- InstanceBeginEditable name="EditPageN" -->44 of 48 <!-- InstanceEndEditable -->  </div>
+</div>
+
+<!-- InstanceBeginEditable name="navigation" -->
+
+<!-- InstanceEndEditable -->
+<div id="Back"><a href="javascript:findBack()" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('btn_back','','../sysimages/back-2.jpg',1)" tabindex="2"><img src="../sysimages/back-0.jpg" alt="Left Arrow" name="btn_back" width="64" height="62" border="0"></a></div>
+<div id="Next"><a href="javascript:findNext()" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('btn_Next','','../sysimages/next-2.jpg',1)" tabindex="3"><img src="../sysimages/next-0.jpg" alt="Right Arrow" name="btn_Next" width="63" height="62" border="0"></a></div>
+
+<div id="help" style="position:absolute; width:80px; height:72px; z-index:6; top: 530px; left: 5px;"><a href="javascript:openHelpModules()" onMouseOver="MM_swapImage('btn_help','','../sysimages/content-help-2.jpg',1)" onMouseOut="MM_swapImgRestore()" tabindex="1"><img src="../sysimages/blank.gif" alt="Help" name="btn_help" width="82" height="70" border="0"></a></div> 
+
+<div id="swoosh"><img src="../sysimages/extrabar/extra-bar-mask2.png" alt="" height="86" width="210"></div>
+
+<div id="extras_up"><a href="javascript:scrollLayer('1')" onMouseOver="divRoll(1,'extras_up_on')" onFocus="javascript:scrollLayer('1')" tabindex="4"><img src="../sysimages/extrabar/up-0.png" alt="Show Extras Menu" name="extra_btn" width="33" height="32" border="0"></a></div>
+<div id="extras_up_on"><a href="javascript:scrollLayer('1')" onMouseOut="divRoll(0,'extras_up_on')"><img src="../sysimages/extrabar/up-2.png" alt="Show Extras Menu" name="extra_btn" width="33" height="32" border="0"></a></div>
+
+<div id="extras_dwn"><a href="javascript:scrollLayer('0')" onMouseOver="divRoll(1,'extras_dwn_on')" onFocus="javascript:scrollLayer('0')" tabindex="10"><img src="../sysimages/extrabar/down-0.png" alt="Hide Extras Menu" name="extra_btn" width="33" height="32" border="0"></a></div>
+<div id="extras_dwn_on"><a href="javascript:scrollLayer('0')" onMouseOut="divRoll(0,'extras_dwn_on')"><img src="../sysimages/extrabar/down-2.png" alt="Hide Extras Menu" name="extra_btn" width="33" height="32" border="0"></a></div>
+
+<div id="extras">
+<table width="144" height="498" border="0" cellspacing="0" cellpadding="0">
+	<tr>
+		<td height="41" valign="top"><img src="../sysimages/blank.gif" height="47"></td>
+	</tr>
+	<tr>
+		<td height="75"><a href="../mainmenu.htm" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('btn_main_menu','','../sysimages/extrabar/home-2.jpg',1)" onFocus="javascript:scrollLayer('1')" tabindex="5"><img src="../sysimages/extrabar/home-0.jpg" alt="Main Menu" name="btn_main_menu" width="163" height="75" border="0"></a></td> 
+	</tr>
+	<tr>
+		<td height="78"><a href="javascript:openGlossary()" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('btn_glossary','','../sysimages/extrabar/glossary-2.jpg',1)" onFocus="javascript:scrollLayer('1')" tabindex="6"><img src="../sysimages/extrabar/glossary-0.jpg" alt="Glossary" name="btn_glossary" width="163" height="78" border="0"></a></td>
+	</tr>
+	<tr>
+		<td height="74"><a href="../pdf/unified_health_communication_course_references.pdf" target="_blank" onMouseOver="MM_swapImage('btn_ref','','../sysimages/extrabar/reference-2.jpg',1)" onMouseOut="MM_swapImgRestore()" onFocus="javascript:scrollLayer('1')" tabindex="7"><img src="../sysimages/extrabar/reference-0.jpg" alt="Reference Material" name="btn_ref" width="163" height="75" border="0"></a></td>
+	</tr>
+	<tr>
+		<td height="76"><a href="../pdf/unifed_health_communication_course_further_reading.pdf" target="_blank" onMouseOver="MM_swapImage('btn_further_reading','','../sysimages/extrabar/further-2.jpg',1)" onMouseOut="MM_swapImgRestore()" onFocus="javascript:scrollLayer('1')"  tabindex="8"><img src="../sysimages/extrabar/further-0.jpg" alt="Further Reading" name="btn_further_reading" width="163" height="76" border="0" ></a></td>
+	</tr>
+	<tr>
+		<td height="77"><a href="javascript:openAccessibility()" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('btn_accessibility','','../sysimages/extrabar/access-2.jpg',1)" onFocus="javascript:scrollLayer('1')" tabindex="9"><img src="../sysimages/extrabar/access-0.jpg" alt="Accessibility" name="btn_accessibility" width="163" height="77" border="0" ></a></td>
+	</tr>
+	<tr>
+		<td><!--<p><br><br><a href="../mainmenu.htm">Main Menu</a>  <a href="javascript:openGlossary()">Glossary</a>  <a href="#">Help</a>  <a href="../pdf/further_reading.pdf" target="_blank">Further Reading</a>  <a href="#">Accessibility</a>	    </p>--></td>
+	</tr>
+</table>
+</div>
+<div id="extrasback"><img src="../sysimages/extrabar/extra-bar.png" alt="" width="179" height="504"></div>
+
+<!--
+<div id="508layer">  
+<a href="javascript:findBack()">Back</a>  <a href="javascript:findNext()">Next</a>  <a href="../mainmenu.htm">Main Menu</a>  <a href="javascript:openGlossary()">Glossary</a>  <a href="#">Help</a>  <a href="../pdf/further_reading.pdf" target="_blank">Further Reading</a>  <a href="#">Accessibility</a></div>
+-->
+
+<div id="expContent">
+  <!-- InstanceBeginEditable name="EditContents" -->
+  <div id="kcIcon" style="width:170px; height:200px; position:absolute; top:100px; left:12px; z-index:7;" ><img src="../sysimages/blank.gif" alt="Knowledge Check Icon" width="170" height="200"></div>
+  <div id="Content" > 
+  <div id="KMback"><img src="../sysimages/knowledge-check.png" width="954" height="437"></div>
+  <div id="question" style="top:56px; width:699px">
+    <p><br>
+      True or false?  Family members and friends typically make excellent interpreters because of their familiarity with the patient.
+</p>
+    <form>
+      <table id="disTable"width="100%" border="0" align="left" cellpadding="3" cellspacing="3" class="distracter">
+        <tr> 
+          <td width="28"  valign="top" ><p> 
+              <input type="radio" name="fmDistracter" tabindex="1" onClick="javascript: if (triesUser <2) hideFeedback()">
+            </p></td>
+          <td width="17"  valign="top"> <p id="Letter1">A.</p></td>
+          <td width="624" colspan="2" valign="top"><p id="cr1"><span class="distrText">True</span></p></td>
+        </tr>
+        <tr> 
+          <td valign="top"><p> 
+              <input type="radio" name="fmDistracter" tabindex="2" onClick="javascript: if (triesUser <2) hideFeedback()">
+            </p></td>
+          <td valign="top"><p id="Letter2">B.</p></td>
+          <td colspan="2" valign="top"><p id="cr2"><span class="distrText">False</span></p></td>
+        </tr>
+        <tr> 
+        </tr>
+        <tr>
+          <td colspan="4" valign="top">&nbsp;</td>
+        </tr>
+        <tr>
+          <td colspan="4" valign="top"><a href="javascript:judgeInteraction()" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Done','','../sysimages/done-2.gif',1)"><img src="../sysimages/done-0.gif" alt="Done button" name="Done" width="117" height="51" border="0"></a></td>
+          </tr>
+      </table>
+  </form> 
+  </div>
+  <div id="feedback" style="position:absolute; top:250px; left:448px; width:400px;"> 
+    <div id="fdbkText" class="fbText" style="text-align:center"></div>
+  </div>
+  </div>
+  <!-- InstanceEndEditable --></div>
+
+<!-- InstanceBeginEditable name="JSControl" --> <!-- InstanceEndEditable -->
+</body>
+<!-- InstanceEnd --></html>

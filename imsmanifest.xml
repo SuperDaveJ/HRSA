@@ -1,0 +1,178 @@
+<?xml version = "1.0"?>
+<manifest identifier="HRSA_Manifest" version="1.0"
+       xmlns="http://www.imsproject.org/xsd/imscp_rootv1p1p2"
+       xmlns:adlcp="http://www.adlnet.org/xsd/adlcp_rootv1p2"
+       xmlns:imsmd="http://www.imsglobal.org/xsd/imsmd_rootv1p2p1"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.imsproject.org/xsd/imscp_rootv1p1p2 imscp_rootv1p1p2.xsd
+                           http://www.imsglobal.org/xsd/imsmd_rootv1p2p1 imsmd_rootv1p2p1.xsd
+                           http://www.adlnet.org/xsd/adlcp_rootv1p2 adlcp_rootv1p2.xsd">
+
+	<metadata>
+    	<schema>ADL SCORM</schema>
+    	<schemaversion>1.2</schemaversion>
+    	<imsmd:lom>
+      		<imsmd:general>
+        		<imsmd:title>
+          			<imsmd:langstring xml:lang="en-US">CDC_SDC</imsmd:langstring>
+        		</imsmd:title>
+      		</imsmd:general>
+    	</imsmd:lom>
+	</metadata>
+
+   <organizations default = "HRSA">
+      	<organization identifier = "HRSA">
+         	<title>HRSA - Unified Health Communications</title>
+         	<item identifier="SDC" identifierref="HRSA_SDC_SCO">
+            		<title>Addressing Health Literacy, Cultural Competency, and Limited English Proficiency</title>
+			</item>
+   		</organization>
+   </organizations>
+
+   <resources>
+      <resource identifier="HRSA_SDC_SCO" type="webcontent" adlcp:scormtype="sco" href="index.htm">
+         <metadata>
+            <schema>ADL SCORM</schema>
+            <schemaversion>1.2</schemaversion>
+            <adlcp:location>hrsa_unified.xml</adlcp:location>
+         </metadata>
+         <file href="index.htm" />
+         <file href="mainmenu.htm" />
+         <dependency identifierref="lessonFiles"/>
+	 	 <dependency identifierref="supportFiles" />
+	 	 <dependency identifierref="lessonImages" />
+	 	 <dependency identifierref="systemImages" />
+	 	 <dependency identifierref="lessonAudios" />
+      </resource>
+
+      <resource identifier="lessonFiles" type="webcontent" adlcp:scormtype="asset">
+         <file href="m1_lessons/01005.html" />
+         <file href="m1_lessons/01010.html" />
+		 <file href="m1_lessons/01015.html" />
+		 <file href="m1_lessons/01020.html" />
+		 <file href="m1_lessons/01025.html" />
+		 <file href="m1_lessons/01030.html" />
+		 <file href="m1_lessons/01031.html" />
+		 <file href="m1_lessons/01035.html" />
+		 <file href="m1_lessons/01040.html" />
+		 <file href="m1_lessons/01045.html" />
+		 <file href="m1_lessons/01050.html" />
+		 <file href="m1_lessons/01055.html" />
+		 <file href="m1_lessons/01060.html" />
+		 <file href="m1_lessons/01065.html" />
+		 <file href="m1_lessons/01070.html" />
+		 <file href="m1_lessons/01071.html" />
+		 <file href="m1_lessons/01075.html" />
+		 <file href="m1_lessons/01080.html" />
+		 <file href="m1_lessons/01085.html" />
+		 <file href="m1_lessons/01090.html" />
+		 <file href="m1_lessons/01095.html" />
+		 <file href="m1_lessons/01100.html" />
+		 <file href="m1_lessons/01105.html" />
+		 <file href="m1_lessons/01110.html" />
+		 <file href="m1_lessons/01115.html" />
+		 <file href="m1_lessons/01120.html" />
+		 <file href="m1_lessons/01125.html" />
+		 <file href="m1_lessons/01130.html" />
+		 <file href="m1_lessons/01135.html" />
+		 <file href="m1_lessons/01140.html" />
+		 <file href="m1_lessons/01145.html" />
+		 
+      </resource>
+
+      <resource identifier="supportFiles" type="webcontent" adlcp:scormtype="asset">
+         <file href="hrsa.css" />
+		 <file href="hrsapopup.css" />
+         <file href="scripts/IEfix.js" />
+		 <file href="scripts/AC_RunActiveContent.js" />
+		 <file href="scripts/arrows.gif" />
+		 <file href="scripts/behActions.js" />
+		 <file href="scripts/behCourseBuilder.js" />
+		 <file href="scripts/behDragLayer.js" />
+		 <file href="scripts/behTimeline.js" />
+		 <file href="scripts/cmi.js" />
+		 <file href="scripts/elemDragClass.js" />
+		 <file href="scripts/elemHotaClass.js" />
+		 <file href="scripts/elemIbtnClass.js" />
+		 <file href="scripts/elemInptClass.js" />
+		 <file href="scripts/elemSldrClass.js" />
+		 <file href="scripts/elemTextClass.js" />
+		 <file href="scripts/elemTimrClass.js" />
+		 <file href="scripts/FS.js" />
+		 <file href="scripts/FSFunctions.js" />
+		 <file href="scripts/FSori.js" />
+		 <file href="scripts/hrsaFunctions.js" />
+		 <file href="scripts/hrsaFunctions_backup.js" />
+		 <file href="scripts/hrsaFunctionsb.js" />
+		 <file href="scripts/interactionClass.js" />
+		 <file href="scripts/mm_menu.js" />	
+		 <file href="scripts/myCourse.js" />
+		 <file href="scripts/pngfix.js" />
+		 <file href="scripts/tims.js" />
+         <file href="scripts/access.js" />
+         <file href="scripts/APIWrapper.js" />
+         <file href="scripts/SCOFunctions.js" />
+      </resource>
+
+      <resource identifier="lessonImages" type="webcontent" adlcp:scormtype="asset">
+         <file href="m1_lessons/images/01-005.png" />
+		 <file href="m1_lessons/images/01-010.png" />
+		 <file href="m1_lessons/images/01-015.png" />
+		 <file href="m1_lessons/images/01-020.png" />
+		 <file href="m1_lessons/images/01-025.png" />
+		 <file href="m1_lessons/images/01-030.png" />
+		 <file href="m1_lessons/images/01-035_100.png" />
+		 <file href="m1_lessons/images/01-040.png" />
+		 <file href="m1_lessons/images/01-045.png" />
+		 <file href="m1_lessons/images/01-050.png" />
+		 <file href="m1_lessons/images/01-055.png" />
+		 <file href="m1_lessons/images/01-060.png" />
+		 <file href="m1_lessons/images/01-065.png" />
+		 <file href="m1_lessons/images/01-075.png" />
+		 <file href="m1_lessons/images/01-080.png" />
+		 <file href="m1_lessons/images/01-085.png" />
+		 <file href="m1_lessons/images/01-090.png" />
+		 <file href="m1_lessons/images/01-105.png" />
+		 <file href="m1_lessons/images/01-110.png" />
+		 <file href="m1_lessons/images/01-115.png" />
+		 <file href="m1_lessons/images/01-120.png" />
+		 <file href="m1_lessons/images/01-125.png" />
+		 <file href="m1_lessons/images/01-130.png" />
+		
+         
+      </resource>
+
+      <resource identifier="systemImages" type="webcontent" adlcp:scormtype="asset">
+         <file href="sysimages/access-down.jpg" />
+         <file href="sysimages/access-up.jpg" />         
+		 <file href="sysimages/back-0.jpg" />
+		 <file href="sysimages/back-2.jpg" />
+         <file href="sysimages/back-down.jpg" />
+         <file href="sysimages/back-up.jpg" />         
+		 <file href="sysimages/blank.gif" />
+         <file href="sysimages/bottom-swoosh.png" />         
+         <file href="sysimages/capstone-door.jpg" />
+         <file href="sysimages/capstone-door-open.jpg" />        
+		 <file href="sysimages/close_0.jpg" />
+		 <file href="sysimages/close_2.jpg" />
+         <file href="sysimages/content-diagram.jpg" />
+		 <file href="sysimages/content-page.jpg" />
+		 <file href="sysimages/credits-2.jpg" />
+		 <file href="sysimages/credits_0.jpg" />
+		 <file href="sysimages/credits_2.jpg" />
+		 <file href="sysimages/credits-down.jpg" />
+         <file href="sysimages/credits-up.jpg" />
+		 <file href="sysimages/cultural-comp-door.jpg" />
+		 <file href="sysimages/cultural-door-open.jpg" />
+		 <file href="sysimages/done-0.png" />
+		 
+         
+      </resource>
+
+      <resource identifier="lessonAudios" type="webcontent" adlcp:scormtype="asset">
+       
+	   
+      </resource>
+   </resources>
+
+</manifest>

@@ -1,0 +1,76 @@
+/* css Zen Garden default style v1.01 */
+/* css released under Creative Commons ShareAlike License v1.0 - http://creativecommons.org/licenses/sa/1.0/  */
+
+/* This file based on 'Tranquille' by Dave Shea */
+/* You may use this file as a foundation for any new work, but you may find it easier to start from scratch. */
+/* Not all elements are defined in this file, so you'll most likely want to refer to the xhtml as well. */
+
+/* Images should be linked as if the CSS file sits in the same folder as the images. ie. no paths. */
+
+
+/* basic elements */
+body { 
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	color:#000000;
+	font-size: 13px; 
+	background-color:#E5EFF7; 
+	margin: 15px; 
+	}
+p {
+	
+	font-style: normal;
+	margin-top: -10px; 
+	text-align: left;
+}
+ul {
+	margin-left: 35px;
+	margin-top: 5px;
+	padding: 0px;
+	list-style-type: disc;
+	/*list-style-image: url(sysimages/Bullet.gif);*/
+	}
+
+ol {
+	margin-left: 35px;
+	margin-top: -5px;
+	padding: 0px;
+
+	}
+
+li {
+	padding-top: 0px; 
+	margin-bottom: 4pt;
+	
+	}
+	
+.popupH {
+	font: bold 13px Verdana;
+	color:#000000;
+	margin-top: 0px; 
+	text-align: left;
+}
+.tblText {
+	padding: 5px;
+	font-style: normal;
+	margin-top: 5px; 
+	text-align: left;
+}
+
+#noGraphicPopupText {
+	position:absolute;
+	left:13px;
+	top:13px;
+	width:500px;
+	height:115px;
+	z-index:2;
+	visibility: visible;
+}
+
+#closebtn {
+	position:absolute; 
+	left:320;
+	top:125px;
+	width:35px; 
+	height:20px; 
+	z-index:7;
+}
